@@ -3,15 +3,15 @@
 	"id": "sealparadise",
 	"version": "${version}",
 	"name": "Seal Paradise",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Minecraft Mod that adds Seal Paradise to the game! Mod created as a final project for 3rd semester of IT studies.",
 	"authors": [
-		"Me!"
+		"Mateusz 'theyurii' Grabowski"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/thematiig17/seal-paradise"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/sealparadise/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -20,7 +20,10 @@
 		],
 		"fabric-datagen": [
 			"pl.theyurii.SealParadiseDataGenerator"
-		]
+		],
+        "client": [
+            "pl.theyurii.SealParadiseClient"
+        ]
 	},
 	"mixins": [
 		"sealparadise.mixins.json"
