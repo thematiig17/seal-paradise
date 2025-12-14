@@ -1,6 +1,10 @@
 {
   "item.sealparadise.tort_block": "TortBlock!",
   "item.sealparadise.portable_seal_niko": "Portable Niko Seal",
+  "item.sealparadise.niko_spawn_egg": "Niko Spawn Egg",
+
+  "entity.sealparadise.niko": "Niko",
 
   "block.sealparadise.block_seal_niko": "Block of Niko Seal"
+
 }
