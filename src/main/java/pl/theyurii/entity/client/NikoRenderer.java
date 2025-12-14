@@ -22,9 +22,9 @@ public class NikoRenderer extends MobEntityRenderer<NikoEntity, NikoModel<NikoEn
     @Override
     public void render(NikoEntity livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         if(livingEntity.isBaby()) {
-            matrixStack.scale(2f, 2f, 2f);
+            matrixStack.scale(1.4f, 1.4f, 1.4f);
         } else {
-            matrixStack.scale(4f, 4f, 4f);
+            matrixStack.scale(2.8f, 2.8f, 2.8f);
         }
         super.render(livingEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }

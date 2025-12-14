@@ -15,6 +15,7 @@ public class NikoModel<T extends NikoEntity> extends SinglePartEntityModel<T> {
 
     public static final EntityModelLayer NIKO = new EntityModelLayer(Identifier.of(SealParadise.MOD_ID, "niko"),"main");
 
+    private final ModelPart nikoroot;
     private final ModelPart hitbox;
     private final ModelPart foka;
     private final ModelPart gowa;
@@ -27,8 +28,9 @@ public class NikoModel<T extends NikoEntity> extends SinglePartEntityModel<T> {
     private final ModelPart ogon;
     private final ModelPart ogonek;
     public NikoModel(ModelPart root) {
-        this.hitbox = root.getChild("hitbox");
-        this.foka = root.getChild("foka");
+        this.nikoroot = root.getChild("nikoroot");
+        this.hitbox = this.nikoroot.getChild("hitbox");
+        this.foka = this.nikoroot.getChild("foka");
         this.gowa = this.foka.getChild("gowa");
         this.tuow = this.foka.getChild("tuow");
         this.apa1 = this.foka.getChild("apa1");
@@ -42,9 +44,9 @@ public class NikoModel<T extends NikoEntity> extends SinglePartEntityModel<T> {
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData hitbox = modelPartData.addChild("hitbox", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData nikoroot = modelPartData.addChild("nikoroot", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
-        ModelPartData foka = modelPartData.addChild("foka", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData foka = nikoroot.addChild("foka", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData gowa = foka.addChild("gowa", ModelPartBuilder.create().uv(24, 29).cuboid(5.0F, -2.0F, -2.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F))
                 .uv(0, 19).cuboid(2.0F, -3.0F, -3.0F, 4.0F, 3.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, 0.0F, 0.0F));
@@ -70,12 +72,17 @@ public class NikoModel<T extends NikoEntity> extends SinglePartEntityModel<T> {
         ModelPartData ogonek = foka.addChild("ogonek", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData ogonek_r1 = ogonek.addChild("ogonek_r1", ModelPartBuilder.create().uv(22, 16).cuboid(-2.1299F, 0.0F, -0.0465F, 3.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-13.0F, -2.0F, 0.0F, 0.0F, -3.098F, 0.0F));
+
+        ModelPartData hitbox = nikoroot.addChild("hitbox", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 64, 64);
     }
     @Override
     public void setAngles(NikoEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
+
+        this.animateMovement(NikoAnimations.ANIM_NIKO_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.updateAnimation(entity.idleAnimationState, NikoAnimations.ANIM_NIKO_IDLE, ageInTicks, 1f);
     }
     private void setHeadAngles(float headYaw, float headPitch){
         headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
@@ -87,11 +94,11 @@ public class NikoModel<T extends NikoEntity> extends SinglePartEntityModel<T> {
     }
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, int color) {
-        foka.render(matrices, vertexConsumer, light, overlay, color);
+        nikoroot.render(matrices, vertexConsumer, light, overlay, color);
     }
 
     @Override
     public ModelPart getPart() {
-        return foka;
+        return nikoroot;
     }
 }

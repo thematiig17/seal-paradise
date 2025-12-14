@@ -13,7 +13,7 @@ public class ModEntities {
     public static final EntityType<NikoEntity> NIKO = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(SealParadise.MOD_ID, "niko"),
             EntityType.Builder.create(NikoEntity::new, SpawnGroup.CREATURE)
-                    .dimensions(1f, 2.5f).build());
+                    .dimensions(1f, 0.5f).build());
 
     public static void registerModEntities(){
         SealParadise.LOGGER.info("Registering Mod Entities for " + SealParadise.MOD_ID);

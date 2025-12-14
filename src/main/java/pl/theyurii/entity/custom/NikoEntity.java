@@ -30,7 +30,7 @@ public class NikoEntity extends AnimalEntity {
         this.goalSelector.add(0, new SwimGoal(this));
 
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 1.25D, Ingredient.ofItems(ModItems.PORTABLE_SEAL_NIKO), false));
+        this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(ModItems.PORTABLE_SEAL_NIKO), false));
 
         this.goalSelector.add(3, new FollowParentGoal(this, 1.1D));
 
@@ -50,7 +50,7 @@ public class NikoEntity extends AnimalEntity {
     //animacje
     private void setupAnimationStates() {
         if(this.idleAnimationTimeout <= 0) {
-            this.idleAnimationTimeout = 40; //ilosc tickow po ktorych animacja sie zresetuje
+            this.idleAnimationTimeout = 80; //ilosc tickow po ktorych animacja sie zresetuje
             this.idleAnimationState.start(this.age);
         } else {
             --this.idleAnimationTimeout;
