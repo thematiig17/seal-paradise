@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "sealparadise:block_seal_niko"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "sealparadise:portable_seal_niko"
+  }
+}

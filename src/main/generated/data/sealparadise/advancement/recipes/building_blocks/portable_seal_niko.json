@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_block_seal_niko": {
+      "conditions": {
+        "items": [
+          {
+            "items": "sealparadise:block_seal_niko"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:portable_seal_niko"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_block_seal_niko"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:portable_seal_niko"
+    ]
+  }
+}
