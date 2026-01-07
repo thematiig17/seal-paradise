@@ -2,3 +2,6 @@
 /gamemode survival
 /gamemode creative
 /time set 0
+/execute in
+/time set 0
+/weather clear

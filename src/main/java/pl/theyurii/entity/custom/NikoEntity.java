@@ -2,6 +2,7 @@ package pl.theyurii.entity.custom;
 
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -12,6 +13,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import pl.theyurii.entity.ModEntities;
@@ -73,5 +77,11 @@ public class NikoEntity extends AnimalEntity {
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.NIKO.create(world);
+    }
+
+    public static boolean canSpawn(EntityType<NikoEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        // Sprawdzamy tylko, czy blok pod spodem jest pełny/solidny (zamiast wymagać trawy)
+        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down())
+                && world.getLightLevel(pos) > 0; // Opcjonalnie: musi być minimalnie widno
     }
 }
