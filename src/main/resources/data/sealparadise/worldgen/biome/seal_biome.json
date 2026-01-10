@@ -1,0 +1,52 @@
+{
+  "has_precipitation": true,
+  "temperature": -0.5,
+  "downfall": 0.5,
+  "effects": {
+    "sky_color": 4251856,
+    "fog_color": 7916543,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "foliage_color": 10387789,
+    "grass_color": 9470285,
+    "particle": {
+      "options": {
+        "type": "minecraft:snowflake"
+      },
+      "probability": 0.02
+    },
+    "mood_sound": {
+      "sound": "minecraft:ambient.basalt_deltas.mood",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "spawners": {
+    "creature": [
+      {
+        "type": "sealparadise:niko",
+        "weight": 100,
+        "minCount": 3,
+        "maxCount": 6
+      }
+    ],
+    "monster": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [ "minecraft:cave", "minecraft:canyon" ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [ "minecraft:freeze_top_layer" ]
+  ]
+}

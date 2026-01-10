@@ -5,3 +5,4 @@
 /execute in
 /time set 0
 /weather clear
+/kill @e[type=sealparadise:niko]

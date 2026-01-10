@@ -2,12 +2,12 @@
   "type": "sealparadise:seal_world",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "minecraft:overworld",
+    "settings": "sealparadise:seal_storage",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "minecraft:plains",
+          "biome": "sealparadise:seal_biome",
           "parameters": {
             "altitude": 0,
             "weirdness": 0,
