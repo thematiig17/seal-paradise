@@ -35,6 +35,12 @@
         "weight": 100,
         "minCount": 3,
         "maxCount": 6
+      },
+      {
+        "type": "sealparadise:mizore",
+        "weight": 100,
+        "minCount": 3,
+        "maxCount": 6
       }
     ],
     "monster": []

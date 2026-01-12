@@ -16,7 +16,7 @@ import pl.theyurii.entity.custom.YoEntity;
 public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     public static final EntityModelLayer YO = new EntityModelLayer(Identifier.of(SealParadise.MOD_ID, "yo"), "main");
-    
+
     private final ModelPart foka;
     private final ModelPart gowa;
     private final ModelPart tuow;
@@ -28,10 +28,10 @@ public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
     private final ModelPart ogon;
     private final ModelPart ogonek;
     private final ModelPart PYSZCZEK;
-
     public YoModel(ModelPart root) {
         this.foka = root.getChild("foka");
         this.gowa = this.foka.getChild("gowa");
+        this.PYSZCZEK = this.gowa.getChild("PYSZCZEK");
         this.tuow = this.foka.getChild("tuow");
         this.apa1 = this.foka.getChild("apa1");
         this.apa2 = this.foka.getChild("apa2");
@@ -40,16 +40,15 @@ public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
         this.ogonprzytuowiu = this.foka.getChild("ogonprzytuowiu");
         this.ogon = this.foka.getChild("ogon");
         this.ogonek = this.foka.getChild("ogonek");
-        this.PYSZCZEK = this.foka.getChild("PYSZCZEK");
     }
-
     public static TexturedModelData getTexturedModelData() {
-        ModelData meshdefinition = new ModelData();
-        ModelPartData partdefinition = meshdefinition.getRoot();
-
-        ModelPartData foka = partdefinition.addChild("foka", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelData modelData = new ModelData();
+        ModelPartData modelPartData = modelData.getRoot();
+        ModelPartData foka = modelPartData.addChild("foka", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 0.0F));
 
         ModelPartData gowa = foka.addChild("gowa", ModelPartBuilder.create().uv(0, 19).cuboid(2.0F, -4.0F, -3.0F, 4.0F, 4.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(2.0F, 0.0F, 0.0F));
+
+        ModelPartData PYSZCZEK = gowa.addChild("PYSZCZEK", ModelPartBuilder.create().uv(24, 29).cuboid(8.0F, -2.0F, -2.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, 0.0F, 0.0F));
 
         ModelPartData tuow = foka.addChild("tuow", ModelPartBuilder.create().uv(0, 0).cuboid(-4.0F, -5.0F, -4.0F, 9.0F, 5.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
@@ -57,7 +56,7 @@ public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
 
         ModelPartData apa2 = foka.addChild("apa2", ModelPartBuilder.create().uv(22, 11).cuboid(1.0F, -1.0F, -8.0F, 3.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-        ModelPartData apatylnia1 = foka.addChild("apatylnia1", ModelPartBuilder.create().uv(-7, -4).cuboid(-4.0F, -4.0F, -4.0F, 8.0F, 4.0F, 6.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData apatylnia1 = foka.addChild("apatylnia1", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData tylniaapa1_r1 = apatylnia1.addChild("tylniaapa1_r1", ModelPartBuilder.create().uv(18, 24).cuboid(-0.7373F, -1.0F, -2.3244F, 2.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(-13.0F, 0.0F, 2.0F, 0.0F, -0.7418F, 0.0F));
 
@@ -72,10 +71,7 @@ public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
         ModelPartData ogonek = foka.addChild("ogonek", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
         ModelPartData ogonek_r1 = ogonek.addChild("ogonek_r1", ModelPartBuilder.create().uv(22, 16).cuboid(-2.1299F, 0.0F, -0.0465F, 3.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-13.0F, -3.0F, 0.0F, 0.0F, -3.098F, 0.0F));
-
-        ModelPartData PYSZCZEK = foka.addChild("PYSZCZEK", ModelPartBuilder.create().uv(24, 29).cuboid(8.0F, -2.0F, -2.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
-
-        return TexturedModelData.of(meshdefinition, 64, 64);
+        return TexturedModelData.of(modelData, 64, 64);
     }
 
     @Override
@@ -83,9 +79,8 @@ public class YoModel<T extends YoEntity> extends SinglePartEntityModel<T> {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
 
-        /*JAK JUZ BEDA DZIALAJACE ANIMACJE*/
-        //this.animateMovement(YoAnimations.ANIM_YO_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
-        //this.updateAnimation(entity.idleAnimationState, YoAnimations.ANIM_YO_IDLE, ageInTicks, 1f);
+        this.animateMovement(YoAnimations.ANIM_YO_WALK, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.updateAnimation(entity.idleAnimationState, YoAnimations.ANIM_YO_GYU, ageInTicks, 1f);
     }
     private void setHeadAngles(float headYaw, float headPitch){
         headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);

@@ -4,10 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import pl.theyurii.entity.ModEntities;
-import pl.theyurii.entity.client.NikoModel;
-import pl.theyurii.entity.client.NikoRenderer;
-import pl.theyurii.entity.client.YoModel;
-import pl.theyurii.entity.client.YoRenderer;
+import pl.theyurii.entity.client.*;
 
 public class SealParadiseClient implements ClientModInitializer {
     @Override
@@ -17,5 +14,8 @@ public class SealParadiseClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(YoModel.YO, YoModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.YO, YoRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(MizoreModel.MIZORE, MizoreModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MIZORE, MizoreRenderer::new);
     }
 }

@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import pl.theyurii.block.ModBlocks;
 import pl.theyurii.entity.ModEntities;
 import pl.theyurii.entity.client.NikoModel;
+import pl.theyurii.entity.custom.MizoreEntity;
 import pl.theyurii.entity.custom.NikoEntity;
 import pl.theyurii.entity.custom.YoEntity;
 import pl.theyurii.item.ModItems;
@@ -31,52 +32,43 @@ public class SealParadise implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+
+        System.out.println("SEALPARADISE: Rejestruje przedmioty, bloki i zwierzęta dla moda " + MOD_ID);
+        //INICJALIZACJA PRZEDMITÓW, BLOKÓW, ZWIERZĄT
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
         ModEntities.registerModEntities();
         FabricDefaultAttributeRegistry.register(ModEntities.NIKO, NikoEntity.createNikoAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.YO, YoEntity.createYoAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MIZORE, YoEntity.createYoAttributes());
 
-        System.out.println("LOG: Rejestruje portal dla modu " + MOD_ID);
-        // Rejestracja portalu
+        System.out.println("SEALPARADISE: Rejestruje portal dla moda " + MOD_ID);
+        //INICJALIZACJA PORTALU
         CustomPortalBuilder.beginPortal()
-                .frameBlock(Blocks.SANDSTONE) // Blok ramy
-                .destDimID(Identifier.of(MOD_ID, "seal_world")) // TWOJA nazwa wymiaru z JSONa
-                .tintColor(128, 128, 128) // Kolor tekstury portalu (szary jak bruk)
+                .frameBlock(Blocks.SANDSTONE)
+                .destDimID(Identifier.of(MOD_ID, "seal_world"))
+                .tintColor(128, 128, 128)
                 .registerPortal();
 
-        //spawnowanie fok w wymiarze fokowym
-        BiomeModifications.addSpawn(
-                // Selektor: dodaj tylko w biomach, które są w Twoim wymiarze
-                context -> context.canGenerateIn(RegistryKey.of(RegistryKeys.DIMENSION, Identifier.of(MOD_ID, "seal_world"))),
-                SpawnGroup.CREATURE, // Grupa (CREATURE = zwierzęta, MONSTER = potwory)
-                ModEntities.NIKO, // Twoja zmienna z zarejestrowanym EntityType
-                100, // WAGA (częstotliwość) - im wyższa, tym częściej się spawnuje
-                5,   // Minimalna wielkość grupki
-                10    // Maksymalna wielkość grupki
-        );
-        // Przykład dla zwierzęcia lądowego:
-        SpawnRestriction.register(
+        System.out.println("SEALPARADISE: Rejestruje warunki pojawiania się zwierząt dla moda " + MOD_ID);
+        //SPAWN RESTRICITON NOWYCH ZWIERZĄT
+        SpawnRestriction.register( //NIKO THE SEAL
                 ModEntities.NIKO,
                 SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                NikoEntity::canSpawn // <--- ZMIANA: Tu podajemy Twoją nową metodę
+                NikoEntity::canSpawn
         );
-        BiomeModifications.addSpawn(
-                // Selektor: dodaj tylko w biomach, które są w Twoim wymiarze
-                context -> context.canGenerateIn(RegistryKey.of(RegistryKeys.DIMENSION, Identifier.of(MOD_ID, "seal_world"))),
-                SpawnGroup.CREATURE, // Grupa (CREATURE = zwierzęta, MONSTER = potwory)
-                ModEntities.YO, // Twoja zmienna z zarejestrowanym EntityType
-                100, // WAGA (częstotliwość) - im wyższa, tym częściej się spawnuje
-                5,   // Minimalna wielkość grupki
-                10    // Maksymalna wielkość grupki
-        );
-        // Przykład dla zwierzęcia lądowego:
-        SpawnRestriction.register(
+        SpawnRestriction.register( //YO THE SEAL
                 ModEntities.YO,
                 SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                YoEntity::canSpawn // <--- ZMIANA: Tu podajemy Twoją nową metodę
+                YoEntity::canSpawn
+        );
+        SpawnRestriction.register( //MIZORE THE SEAL
+                ModEntities.MIZORE,
+                SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                MizoreEntity::canSpawn
         );
 	}
 }
