@@ -1,3 +1,4 @@
-// 1.21	2025-12-14T18:36:28.3508689	Seal Paradise/Tags for minecraft:block
-715b377f5d36bb31aec783e58c2051243e119f7d data\minecraft\tags\block\mineable\pickaxe.json
+// 1.21	2026-01-12T12:45:17.3532629	Seal Paradise/Tags for minecraft:block
+6ff2212d547356475df3c9b8bf0fb793c86eff42 data\minecraft\tags\block\mineable\pickaxe.json
+209364c41feb42e48185953e15e0561f8531a6fb data\minecraft\tags\block\needs_stone_tool.json
 715b377f5d36bb31aec783e58c2051243e119f7d data\minecraft\tags\block\needs_iron_tool.json

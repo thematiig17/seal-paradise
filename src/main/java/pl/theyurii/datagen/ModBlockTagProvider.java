@@ -16,7 +16,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.BLOCK_SEAL_NIKO);
+                .add(ModBlocks.BLOCK_SEAL_NIKO)
+                .add(ModBlocks.SNOWY_COBBLESTONE);
+
+        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
+                .add(ModBlocks.SNOWY_COBBLESTONE);
 
         getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
                 .add(ModBlocks.BLOCK_SEAL_NIKO);

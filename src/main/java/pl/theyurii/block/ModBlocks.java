@@ -19,6 +19,11 @@ public class ModBlocks {
             .requiresTool()
             .sounds(BlockSoundGroup.AMETHYST_BLOCK)
     ));
+    public static final Block SNOWY_COBBLESTONE = registerBlock("snowy_cobblestone", new Block(AbstractBlock.Settings.create()
+            .strength(4f)
+            .requiresTool()
+            .sounds(BlockSoundGroup.STONE)
+    ));
 
 
     private static Block registerBlock(String name, Block block) {
@@ -33,6 +38,7 @@ public class ModBlocks {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.add(ModBlocks.BLOCK_SEAL_NIKO);
+            entries.add(ModBlocks.SNOWY_COBBLESTONE);
         });
     }
 }
