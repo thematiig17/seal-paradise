@@ -3,7 +3,8 @@
 	"package": "pl.theyurii.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+		"ExampleMixin",
+        "BiomeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
