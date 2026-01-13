@@ -53,8 +53,6 @@ public class NikoEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-        //this.goalSelector.add(0, new BreatheAirGoal(this));
-
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
         this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(Items.COD), false));
         this.goalSelector.add(3, new FollowParentGoal(this, 1.1D));
@@ -83,22 +81,21 @@ public class NikoEntity extends AnimalEntity {
 
     @Override
     public void travel(Vec3d movementInput) {
-        // Sprawdzamy, czy foka jest w wodzie i czy chce pływać (ma AI)
+        //sprawdzenie czy foka jest w wodzie
         if (this.isSubmergedInWater() && this.isLogicalSideForUpdatingMovement()) {
 
-            // Przesuń się w kierunku patrzenia (pływanie 3D)
             this.updateVelocity(0.2F, movementInput);
             this.move(net.minecraft.entity.MovementType.SELF, this.getVelocity());
 
-            // Opór wody (spowalnianie)
+            //opor wody
             this.setVelocity(this.getVelocity().multiply(0.9));
 
-            // Jeśli nie ma celu, niech powoli opada (symulacja wagi) lub stoi w miejscu
+            //powolne opadanie jak stoi w miejscu
             if (this.getTarget() == null) {
                 this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
             }
         } else {
-            // Standardowa fizyka lądowa (grawitacja, tarcie bloku)
+            //w przeciwnym wypadku standardowe chodzenie po ladzie.
             super.travel(movementInput);
         }
     }
@@ -110,11 +107,11 @@ public class NikoEntity extends AnimalEntity {
             this.setupAnimationStates();
         }
         if (this.isSubmergedInWater() || this.isInLava()) {
-            // JESTEŚMY W WODZIE -> Ustawiamy tryb pływania
+            //ustawiamy tryb pływania
             this.navigation = this.waterNavigation;
             this.moveControl = this.waterMoveControl;
         } else {
-            // JESTEŚMY NA LĄDZIE -> Ustawiamy tryb chodzenia
+            //ustawiamy tryb chodzenia
             this.navigation = this.landNavigation;
             this.moveControl = this.landMoveControl;
         }
@@ -122,19 +119,19 @@ public class NikoEntity extends AnimalEntity {
 
     @Override
     protected int getNextAirUnderwater(int air) {
-        return air; // Nie tracimy powietrza pod wodą -> Foka jest nieśmiertelna w wodzie
+        return air; //nie tracimy powietrza pod woda
     }
     @Override
     protected int getNextAirOnLand(int air) {
-        return this.getMaxAir(); // Natychmiastowe napełnienie płuc po wyjściu
+        return this.getMaxAir(); //natychmiastowe napełnienie płuc po wyjściu
     }
     @Override
     public boolean isPushedByFluids() {
-        return false; // Foka nie jest spychana przez nurt wody (opcjonalne, ułatwia pływanie)
+        return false; //foka nie jest spychana przez nurt wody
     }
     @Override
     public int getMaxAir() {
-        return 4800; // 4800 ticków = 4 minuty pod wodą (domyślnie jest tylko 300 = 15 sekund)
+        return 4800; //4 minuty pod wodą
     }
 
     @Override
@@ -148,8 +145,7 @@ public class NikoEntity extends AnimalEntity {
     }
 
     public static boolean canSpawn(EntityType<NikoEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        // Sprawdzamy tylko, czy blok pod spodem jest pełny/solidny (zamiast wymagać trawy)
         return world.getBlockState(pos.down()).isSolidBlock(world, pos.down())
-                && world.getLightLevel(pos) > 0; // Opcjonalnie: musi być minimalnie widno
+                && world.getLightLevel(pos) > 0;
     }
 }
