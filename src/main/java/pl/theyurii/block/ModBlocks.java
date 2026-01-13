@@ -24,6 +24,10 @@ public class ModBlocks {
             .requiresTool()
             .sounds(BlockSoundGroup.STONE)
     ));
+    public static final Block FISH_BLOCK = registerBlock("fish_block", new Block(AbstractBlock.Settings.create()
+            .strength(4f)
+            .sounds(BlockSoundGroup.SLIME)
+    ));
 
 
     private static Block registerBlock(String name, Block block) {
@@ -39,6 +43,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register(entries -> {
             entries.add(ModBlocks.BLOCK_SEAL_NIKO);
             entries.add(ModBlocks.SNOWY_COBBLESTONE);
+            entries.add(ModBlocks.FISH_BLOCK);
         });
     }
 }

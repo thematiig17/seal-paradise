@@ -11,7 +11,7 @@ import pl.theyurii.entity.custom.YoEntity;
 public class YoRenderer extends MobEntityRenderer<YoEntity, YoModel<YoEntity>> {
 
     public YoRenderer(EntityRendererFactory.Context context) {
-        super(context, new YoModel<>(context.getPart(YoModel.YO)), 0.75f);
+        super(context, new YoModel<>(context.getPart(YoModel.YO)), 0.4f);
     }
 
     @Override
@@ -22,9 +22,9 @@ public class YoRenderer extends MobEntityRenderer<YoEntity, YoModel<YoEntity>> {
     @Override
     public void render(YoEntity livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         if(livingEntity.isBaby()) {
-            matrixStack.scale(1.4f, 1.4f, 1.4f);
+            matrixStack.scale(1.5f, 1.6f, 1.5f);
         } else {
-            matrixStack.scale(2.8f, 2.8f, 2.8f);
+            matrixStack.scale(3f, 3.2f, 3f);
         }
         super.render(livingEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }

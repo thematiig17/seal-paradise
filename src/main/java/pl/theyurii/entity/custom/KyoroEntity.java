@@ -16,6 +16,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -50,13 +51,9 @@ public class KyoroEntity extends AnimalEntity {
 
     @Override
     protected void initGoals() {
-        //this.goalSelector.add(0, new BreatheAirGoal(this));
-
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(ModItems.PORTABLE_SEAL_NIKO), false));
+        this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(Items.SALMON), false));
         this.goalSelector.add(3, new FollowParentGoal(this, 1.1D));
-
-
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
@@ -86,7 +83,7 @@ public class KyoroEntity extends AnimalEntity {
         if (this.isSubmergedInWater() && this.isLogicalSideForUpdatingMovement()) {
 
             // Przesuń się w kierunku patrzenia (pływanie 3D)
-            this.updateVelocity(0.3F, movementInput);
+            this.updateVelocity(0.2F, movementInput);
             this.move(net.minecraft.entity.MovementType.SELF, this.getVelocity());
 
             // Opór wody (spowalnianie)
@@ -138,7 +135,7 @@ public class KyoroEntity extends AnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(ModItems.PORTABLE_SEAL_NIKO); //czym mozna karmic foke
+        return stack.isOf(Items.SALMON); //czym mozna karmic foke
     }
 
     @Override

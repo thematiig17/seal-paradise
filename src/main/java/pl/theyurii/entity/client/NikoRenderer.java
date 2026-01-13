@@ -11,7 +11,7 @@ import pl.theyurii.entity.custom.NikoEntity;
 public class NikoRenderer extends MobEntityRenderer<NikoEntity, NikoModel<NikoEntity>> {
 
     public NikoRenderer(EntityRendererFactory.Context context) {
-            super(context, new NikoModel<>(context.getPart(NikoModel.NIKO)), 0.75f);
+            super(context, new NikoModel<>(context.getPart(NikoModel.NIKO)), 0.4f);
     }
 
     @Override

@@ -1,2 +1,4 @@
-// 1.21	2026-01-12T12:45:17.355341	Seal Paradise/Block Loot Tables
-f4922505bdb94c8dc15b7c381a855d3c90353a3d data\sealparadise\loot_table\blocks\block_seal_niko.json
+// 1.21	2026-01-13T21:17:59.031782	Seal Paradise/Block Loot Tables
+657a532163c8ed6f92b50094e5d4cbeaaec29bd9 data/sealparadise/loot_table/blocks/snowy_cobblestone.json
+18d4471922da12567ea3de83d7a95746a1e76bb7 data/sealparadise/loot_table/blocks/fish_block.json
+f4922505bdb94c8dc15b7c381a855d3c90353a3d data/sealparadise/loot_table/blocks/block_seal_niko.json

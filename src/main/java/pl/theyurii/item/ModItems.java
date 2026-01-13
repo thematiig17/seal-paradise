@@ -15,10 +15,10 @@ public class ModItems {
     public static final Item TORT_BLOCK = registerItem("tort_block", new Item(new Item.Settings()));
     public static final Item PORTABLE_SEAL_NIKO = registerItem("portable_seal_niko", new Item(new Item.Settings()));
 
-    public static final Item NIKO_SPAWN_EGG = registerItem("niko_spawn_egg", new SpawnEggItem(ModEntities.NIKO, 0x9dc783, 0xbfaf5f, new Item.Settings()));
-    public static final Item YO_SPAWN_EGG = registerItem("yo_spawn_egg", new SpawnEggItem(ModEntities.YO, 0x9dc783, 0xbfaf5f, new Item.Settings()));
-    public static final Item MIZORE_SPAWN_EGG = registerItem("mizore_spawn_egg", new SpawnEggItem(ModEntities.MIZORE, 0x9dc783, 0xbfaf5f, new Item.Settings()));
-    public static final Item KYORO_SPAWN_EGG = registerItem("kyoro_spawn_egg", new SpawnEggItem(ModEntities.KYORO, 0x9dc783, 0xbfaf5f, new Item.Settings()));
+    public static final Item NIKO_SPAWN_EGG = registerItem("niko_spawn_egg", new SpawnEggItem(ModEntities.NIKO, 0x5f2a0b, 0xffd080, new Item.Settings()));
+    public static final Item YO_SPAWN_EGG = registerItem("yo_spawn_egg", new SpawnEggItem(ModEntities.YO, 0x5e5e5e, 0xc4c4c4, new Item.Settings()));
+    public static final Item MIZORE_SPAWN_EGG = registerItem("mizore_spawn_egg", new SpawnEggItem(ModEntities.MIZORE, 0xc4c4c4, 0xffffff, new Item.Settings()));
+    public static final Item KYORO_SPAWN_EGG = registerItem("kyoro_spawn_egg", new SpawnEggItem(ModEntities.KYORO, 0x5e5e5e, 0x000000, new Item.Settings()));
 
     //pomocnicza funkcja rejestrujaca item w rejestrze
     private static Item registerItem(String name, Item item) {

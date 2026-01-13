@@ -12,7 +12,7 @@ import pl.theyurii.entity.custom.NikoEntity;
 public class KyoroRenderer extends MobEntityRenderer<KyoroEntity, KyoroModel<KyoroEntity>> {
 
     public KyoroRenderer(EntityRendererFactory.Context context) {
-        super(context, new KyoroModel<>(context.getPart(KyoroModel.KYORO)), 0.75f);
+        super(context, new KyoroModel<>(context.getPart(KyoroModel.KYORO)), 0.4f);
     }
 
     @Override

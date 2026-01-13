@@ -22,6 +22,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.BLOCK_SEAL_NIKO);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SNOWY_COBBLESTONE);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.FISH_BLOCK);
     }
 
     @Override
@@ -29,21 +30,11 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.PORTABLE_SEAL_NIKO, Models.GENERATED);
         itemModelGenerator.register(ModItems.TORT_BLOCK, Models.GENERATED);
 
-        itemModelGenerator.register(
-                ModItems.NIKO_SPAWN_EGG,
-                new Model(Optional.of(Identifier.ofVanilla("item/template_spawn_egg")), Optional.empty())
-        );
-        itemModelGenerator.register(
-                ModItems.YO_SPAWN_EGG,
-                new Model(Optional.of(Identifier.ofVanilla("item/template_spawn_egg")), Optional.empty())
-        );
-        itemModelGenerator.register(
-                ModItems.MIZORE_SPAWN_EGG,
-                new Model(Optional.of(Identifier.ofVanilla("item/template_spawn_egg")), Optional.empty())
-        );
-        itemModelGenerator.register(
-                ModItems.KYORO_SPAWN_EGG,
-                new Model(Optional.of(Identifier.ofVanilla("item/template_spawn_egg")), Optional.empty())
-        );
+        Model spawnEggModel = new Model(Optional.of(Identifier.ofVanilla("item/template_spawn_egg")), Optional.empty());
+
+        itemModelGenerator.register(ModItems.NIKO_SPAWN_EGG, spawnEggModel);
+        itemModelGenerator.register(ModItems.KYORO_SPAWN_EGG, spawnEggModel);
+        itemModelGenerator.register(ModItems.MIZORE_SPAWN_EGG, spawnEggModel);
+        itemModelGenerator.register(ModItems.YO_SPAWN_EGG, spawnEggModel);
     }
 }

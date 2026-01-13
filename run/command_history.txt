@@ -8,3 +8,5 @@
 /kill @e[type=sealparadise:niko]
 /summon sealparadise:kyoro -37.16 72.00 110.33
 /summon sealparadise:kyoro -39.54 72.00 108.26
+/TIME SET 0
+/time set 0

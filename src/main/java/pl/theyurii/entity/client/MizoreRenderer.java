@@ -11,7 +11,7 @@ import pl.theyurii.entity.custom.MizoreEntity;
 public class MizoreRenderer extends MobEntityRenderer<MizoreEntity, MizoreModel<MizoreEntity>> {
 
     public MizoreRenderer(EntityRendererFactory.Context context) {
-        super(context, new MizoreModel<>(context.getPart(MizoreModel.MIZORE)), 0.75f);
+        super(context, new MizoreModel<>(context.getPart(MizoreModel.MIZORE)), 0.25f);
     }
 
     @Override
@@ -22,9 +22,9 @@ public class MizoreRenderer extends MobEntityRenderer<MizoreEntity, MizoreModel<
     @Override
     public void render(MizoreEntity livingEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         if(livingEntity.isBaby()) {
-            matrixStack.scale(1.4f, 1.4f, 1.4f);
+            matrixStack.scale(1.2f, 1.2f, 1.2f);
         } else {
-            matrixStack.scale(2.8f, 2.8f, 2.8f);
+            matrixStack.scale(2.4f, 2.4f, 2.4f);
         }
         super.render(livingEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }

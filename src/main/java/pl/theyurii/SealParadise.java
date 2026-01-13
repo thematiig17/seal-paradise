@@ -47,7 +47,7 @@ public class SealParadise implements ModInitializer {
         System.out.println("SEALPARADISE: Rejestruje portal dla moda " + MOD_ID);
         //INICJALIZACJA PORTALU
         CustomPortalBuilder.beginPortal()
-                .frameBlock(Blocks.SANDSTONE)
+                .frameBlock(ModBlocks.FISH_BLOCK)
                 .destDimID(Identifier.of(MOD_ID, "seal_world"))
                 .tintColor(128, 128, 128)
                 .registerPortal();

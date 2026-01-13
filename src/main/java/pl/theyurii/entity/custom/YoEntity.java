@@ -3,7 +3,12 @@ package pl.theyurii.entity.custom;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.control.AquaticMoveControl;
+import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.pathing.MobNavigation;
+import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.ai.pathing.SwimNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -11,9 +16,11 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -25,19 +32,30 @@ public class YoEntity extends AnimalEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
+    protected final SwimNavigation waterNavigation;
+    protected final MobNavigation landNavigation;
+    protected final MoveControl waterMoveControl;
+    protected final MoveControl landMoveControl;
+
     public YoEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+
+        this.waterNavigation = new SwimNavigation(this, world);
+        this.landNavigation = new MobNavigation(this, world);
+
+        this.waterMoveControl = new AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.landMoveControl = new MoveControl(this);
+
+        this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER_BORDER, 0.0F);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new SwimGoal(this));
 
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.15D));
-        this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(ModItems.PORTABLE_SEAL_NIKO), false));
-
+        this.goalSelector.add(2, new TemptGoal(this, 0.6D, Ingredient.ofItems(Items.TROPICAL_FISH), false));
         this.goalSelector.add(3, new FollowParentGoal(this, 1.1D));
-
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 4.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
@@ -62,16 +80,65 @@ public class YoEntity extends AnimalEntity {
     }
 
     @Override
+    public void travel(Vec3d movementInput) {
+        // Sprawdzamy, czy foka jest w wodzie i czy chce pływać (ma AI)
+        if (this.isSubmergedInWater() && this.isLogicalSideForUpdatingMovement()) {
+
+            // Przesuń się w kierunku patrzenia (pływanie 3D)
+            this.updateVelocity(0.2F, movementInput);
+            this.move(net.minecraft.entity.MovementType.SELF, this.getVelocity());
+
+            // Opór wody (spowalnianie)
+            this.setVelocity(this.getVelocity().multiply(0.9));
+
+            // Jeśli nie ma celu, niech powoli opada (symulacja wagi) lub stoi w miejscu
+            if (this.getTarget() == null) {
+                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
+            }
+        } else {
+            // Standardowa fizyka lądowa (grawitacja, tarcie bloku)
+            super.travel(movementInput);
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
         if(this.getWorld().isClient()){
             this.setupAnimationStates();
         }
+        if (this.isSubmergedInWater() || this.isInLava()) {
+            // JESTEŚMY W WODZIE -> Ustawiamy tryb pływania
+            this.navigation = this.waterNavigation;
+            this.moveControl = this.waterMoveControl;
+        } else {
+            // JESTEŚMY NA LĄDZIE -> Ustawiamy tryb chodzenia
+            this.navigation = this.landNavigation;
+            this.moveControl = this.landMoveControl;
+        }
     }
 
     @Override
+    protected int getNextAirUnderwater(int air) {
+        return air; // Nie tracimy powietrza pod wodą -> Foka jest nieśmiertelna w wodzie
+    }
+    @Override
+    protected int getNextAirOnLand(int air) {
+        return this.getMaxAir(); // Natychmiastowe napełnienie płuc po wyjściu
+    }
+    @Override
+    public boolean isPushedByFluids() {
+        return false; // Foka nie jest spychana przez nurt wody (opcjonalne, ułatwia pływanie)
+    }
+    @Override
+    public int getMaxAir() {
+        return 4800; // 4800 ticków = 4 minuty pod wodą (domyślnie jest tylko 300 = 15 sekund)
+    }
+
+
+    @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(ModItems.PORTABLE_SEAL_NIKO); //czym mozna karmic foke
+        return stack.isOf(Items.TROPICAL_FISH); //czym mozna karmic foke
     }
 
     @Override
