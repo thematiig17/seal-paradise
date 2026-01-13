@@ -42,7 +42,7 @@ public class KyoroEntity extends AnimalEntity {
         this.waterNavigation = new SwimNavigation(this, world);
         this.landNavigation = new MobNavigation(this, world);
 
-        this.waterMoveControl = new AquaticMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.waterMoveControl = new AquaticMoveControl(this, 85, 60, 0.5F, 0.1F, true);
         this.landMoveControl = new MoveControl(this);
 
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
