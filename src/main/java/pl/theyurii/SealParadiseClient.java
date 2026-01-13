@@ -17,5 +17,8 @@ public class SealParadiseClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(MizoreModel.MIZORE, MizoreModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MIZORE, MizoreRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(KyoroModel.KYORO, KyoroModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.KYORO, KyoroRenderer::new);
     }
 }

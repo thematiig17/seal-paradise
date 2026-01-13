@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import pl.theyurii.block.ModBlocks;
 import pl.theyurii.entity.ModEntities;
 import pl.theyurii.entity.client.NikoModel;
+import pl.theyurii.entity.custom.KyoroEntity;
 import pl.theyurii.entity.custom.MizoreEntity;
 import pl.theyurii.entity.custom.NikoEntity;
 import pl.theyurii.entity.custom.YoEntity;
@@ -40,7 +41,8 @@ public class SealParadise implements ModInitializer {
         ModEntities.registerModEntities();
         FabricDefaultAttributeRegistry.register(ModEntities.NIKO, NikoEntity.createNikoAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.YO, YoEntity.createYoAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.MIZORE, YoEntity.createYoAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MIZORE, MizoreEntity.createMizoreAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.KYORO, KyoroEntity.createKyoroAttributes());
 
         System.out.println("SEALPARADISE: Rejestruje portal dla moda " + MOD_ID);
         //INICJALIZACJA PORTALU
@@ -69,6 +71,12 @@ public class SealParadise implements ModInitializer {
                 SpawnLocationTypes.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                 MizoreEntity::canSpawn
+        );
+        SpawnRestriction.register( //KYORO THE SEAL
+                ModEntities.KYORO,
+                SpawnLocationTypes.ON_GROUND,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                KyoroEntity::canSpawn
         );
 	}
 }

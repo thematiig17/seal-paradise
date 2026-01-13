@@ -27,6 +27,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public void generate() {
         //tu dodajemy blocki ktore mają wypadać
         addDrop(ModBlocks.BLOCK_SEAL_NIKO);
+        addDrop(ModBlocks.SNOWY_COBBLESTONE);
     }
 
     //jak bedziemy chcieli dropac kilka przedmiotow

@@ -44,7 +44,7 @@ public class MizoreEntity extends AnimalEntity {
         this.goalSelector.add(6, new LookAroundGoal(this));
     }
 
-    public static DefaultAttributeContainer.Builder createYoAttributes() {
+    public static DefaultAttributeContainer.Builder createMizoreAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 10.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35D)

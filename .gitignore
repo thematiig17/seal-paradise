@@ -106,3 +106,6 @@ Temporary Items
 .apdisk
 
 .idea/runConfigurations/
+/.idea/runConfigurations
+.idea/runConfigurations/Minecraft_Client.xml
+.idea/runConfigurations/Minecraft_Server.xml

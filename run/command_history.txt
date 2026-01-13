@@ -6,3 +6,5 @@
 /time set 0
 /weather clear
 /kill @e[type=sealparadise:niko]
+/summon sealparadise:kyoro -37.16 72.00 110.33
+/summon sealparadise:kyoro -39.54 72.00 108.26
